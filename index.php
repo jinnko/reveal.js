@@ -24,7 +24,7 @@ if ($handle = opendir('../Presentations')) {
               $theme = str_replace('.css', '', $t);
               print "<a href='markdown.php?content=$entry&theme=$theme'>$theme</a> | ";
             }
-            print "</li>\n";
+            print "<a href='markdown.php?content=$entry&theme=simple/print-pdf/'>print</a></li>\n";
         }
     }
     closedir($handle);
