@@ -22,7 +22,7 @@ if ($handle = opendir('../Presentations')) {
             print "<li style='display:table-row'><strong style='display:table-cell; padding-right:1em'>".str_replace('.md', '', $entry)."</strong> ";
             foreach ( $themes as $t ) {
               $theme = str_replace('.css', '', $t);
-              print "<a href='markdown.php?content=$entry&theme=$theme'>$theme</a> | ";
+              print "<a href='markdown.php?content=".rawurlencode($entry)."&theme=$theme'>$theme</a> | ";
             }
             print "<a href='markdown.php?content=$entry&theme=simple/print-pdf/'>print</a></li>\n";
         }
