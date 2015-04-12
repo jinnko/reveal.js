@@ -17,6 +17,8 @@
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
+		<link rel="stylesheet" href="css/local.css">
+
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -43,10 +45,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
         <section data-markdown="../Presentations/<?= $_GET['content'] ?>"
-           data-separator="---"
+           data-separator="^---"
            data-vertical="^\.\.\."
            data-notes="^Note:"
-           data-charset="iso-8859-15">
+           data-charset="utf-8">
         </section>
 			</div>
 
@@ -59,12 +61,49 @@
 
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
+      <?php
+      if (isset($_GET['size'])) {
+        switch ($_GET['size']) {
+          case 'xl':
+            $w = 640;
+            $h = 480;
+            break;
+          case '480p':
+            $w = 854;
+            $h = 480;
+            break;
+          case 'l':
+            $w = 800;
+            $h = 600;
+            break;
+          case 'm':
+            $w = 1024;
+            $h = 768;
+            break;
+          case '720p':
+            $w = 1280;
+            $h = 720;
+            break;
+          case 's':
+            $w = 1440;
+            $h = 900;
+            break;
+          default:
+            $w = 1152;
+            $h = 768;
+            break;
+        }
+      } else {
+        $w = 1152;
+        $h = 768;
+      }
+      ?>
 			Reveal.initialize({
-				width: 1440,
-				height: 900,
+        width: <?= $w ?>,
+        height: <?= $h ?>,
 				margin: 0.1,
-				minScale: 0.1,
-				maxScale: 2.0,
+				minScale: 0.5,
+				maxScale: 4.0,
 
 				controls: true,
 				progress: true,
@@ -90,6 +129,11 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+      Reveal.configure({
+        keyboard: {
+          114: function() { document.location.reload(); },
+        }
+      });
 
 		</script>
 
